@@ -1,0 +1,3 @@
+/home/dimoj/SEA-ME-warm-up/Modules/Module00/ex03/build/CMakeFiles/phonebook.dir
+/home/dimoj/SEA-ME-warm-up/Modules/Module00/ex03/build/CMakeFiles/edit_cache.dir
+/home/dimoj/SEA-ME-warm-up/Modules/Module00/ex03/build/CMakeFiles/rebuild_cache.dir
