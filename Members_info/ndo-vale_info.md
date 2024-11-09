@@ -1,7 +1,7 @@
 # FirstName LastName (Unique ID)
 Nuno Ventura de Sousa (ndo-vale)
 ## Profile Pic:
-
+![ndo-vale photo] (nuno_42photo)
 ## Call me by this name:
 Nuno
 ## Cohort:
