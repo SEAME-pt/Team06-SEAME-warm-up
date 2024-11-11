@@ -14,6 +14,7 @@ using std::getline;
 using std::string;
 using std::stringstream;
 using std::vector;
+
 class Phonebook
 {
 public:
@@ -37,4 +38,4 @@ string  add_prompt(string s);
 string  ft_trim_ws(string s);
 bool    ft_isspace(string s);
 void    pause();
-void    clearScreen();
+void    clearScreen(string header = "");

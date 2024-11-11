@@ -1,12 +1,11 @@
 #include "ex03.hpp"
 
-
 int main(int ac, char** av){
     Phonebook phonebook;
     string cmd;
 
     while (cmd != "EXIT" && !cin.eof() && !cin.fail()){
-        clearScreen();
+        clearScreen("PHONEBOOK");
         cout << "ADD\n";
         cout << "SEARCH\n";
         cout << "REMOVE\n";

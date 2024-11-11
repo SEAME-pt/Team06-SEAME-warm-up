@@ -8,9 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/dimoj/SEA-ME-warm-up/Modules/Module00/ex03/src/Contact.cpp" "CMakeFiles/phonebook.dir/src/Contact.cpp.o" "gcc" "CMakeFiles/phonebook.dir/src/Contact.cpp.o.d"
-  "/home/dimoj/SEA-ME-warm-up/Modules/Module00/ex03/src/Phonebook.cpp" "CMakeFiles/phonebook.dir/src/Phonebook.cpp.o" "gcc" "CMakeFiles/phonebook.dir/src/Phonebook.cpp.o.d"
-  "/home/dimoj/SEA-ME-warm-up/Modules/Module00/ex03/src/ex03.cpp" "CMakeFiles/phonebook.dir/src/ex03.cpp.o" "gcc" "CMakeFiles/phonebook.dir/src/ex03.cpp.o.d"
+  "/home/zeira/Team06-SEAME-warm-up/SEA-ME-warm-up/Modules/Module00/ex03/src/Contact.cpp" "CMakeFiles/phonebook.dir/src/Contact.cpp.o" "gcc" "CMakeFiles/phonebook.dir/src/Contact.cpp.o.d"
+  "/home/zeira/Team06-SEAME-warm-up/SEA-ME-warm-up/Modules/Module00/ex03/src/Phonebook.cpp" "CMakeFiles/phonebook.dir/src/Phonebook.cpp.o" "gcc" "CMakeFiles/phonebook.dir/src/Phonebook.cpp.o.d"
+  "/home/zeira/Team06-SEAME-warm-up/SEA-ME-warm-up/Modules/Module00/ex03/src/ex03.cpp" "CMakeFiles/phonebook.dir/src/ex03.cpp.o" "gcc" "CMakeFiles/phonebook.dir/src/ex03.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
