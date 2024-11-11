@@ -164,20 +164,20 @@ bool    Phonebook::hasContacts() const {
     return this->_contacts.size() > 0;
 }
 
-string add_prompt(string s) {
+const string add_prompt(const string& s) {
    string	str;
 
     cout << s;
     while (str.empty() || ft_isspace(str))
     {
-        getline(std::cin, str);
-        if (std::cin.eof() ||cin.fail())
+        getline(cin, str);
+        if (cin.eof() ||cin.fail())
             exit (1);
     }
     return (ft_trim_ws(str));
 }
 
-std::string	ft_trim_ws(std::string s)
+const string   ft_trim_ws(string s)
 {
 	int i = 0;
 
@@ -186,18 +186,18 @@ std::string	ft_trim_ws(std::string s)
 	return(s.substr(i, s.length() - i));
 }
 
-bool	ft_isspace(std::string s)
+bool    ft_isspace(const string& s)
 {
 	for(int i = 0; i < static_cast<int>(s.length()); i++)
 	{
-		if(!std::isspace(s[i]))
+		if(!isspace(s[i]))
 			return false;
 	}
 	return true;
 }
 
 
-void clearScreen(string header) {
+void    clearScreen(const string& header) {
     cout << "\033[2J\033[1;1H";
     if (!header.empty()) {
         cout << header;
@@ -206,7 +206,7 @@ void clearScreen(string header) {
     }
 }
 
-void pause(){
+void    pause(){
     cout << "\nPress ENTER to continue...";
     while(1) {
         if (cin.get() == '\n')

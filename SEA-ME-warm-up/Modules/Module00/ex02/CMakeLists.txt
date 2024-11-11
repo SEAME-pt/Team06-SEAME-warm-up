@@ -15,3 +15,9 @@ file(GLOB SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
 # Add the executable
 add_executable(convert ${SOURCES})
+
+# Enable testing
+enable_testing()
+
+# Include test directory
+add_subdirectory(test)

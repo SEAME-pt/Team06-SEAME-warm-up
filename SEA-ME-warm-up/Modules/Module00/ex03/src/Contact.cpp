@@ -8,15 +8,15 @@ Contact::~Contact(){
     return;
 }
 
-void    Contact::setName(string name){
+void    Contact::setName(const string& name){
     this->_name = name;
 }
 
-void    Contact::setNumber(string number){
+void    Contact::setNumber(const string& number){
     this->_number = number;
 }
 
-void    Contact::setNickname(string nickname){
+void    Contact::setNickname(const string& nickname){
     this->_nickname = nickname;
 }
 

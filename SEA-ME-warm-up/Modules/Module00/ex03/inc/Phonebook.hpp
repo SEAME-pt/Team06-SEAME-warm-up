@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef PHONEBOOK_HPP
+#define PHONEBOOK_HPP
 #include "Contact.hpp"
 
 #include <string>
@@ -11,6 +11,7 @@
 using std::cin;
 using std::cout;
 using std::getline;
+using std::isspace;
 using std::string;
 using std::stringstream;
 using std::vector;
@@ -34,8 +35,10 @@ private:
     bool hasContacts() const;
 };
 
-string  add_prompt(string s);
-string  ft_trim_ws(string s);
-bool    ft_isspace(string s);
+const string  add_prompt(const string& s);
+const string  ft_trim_ws(string s);
+bool    ft_isspace(const string& s);
 void    pause();
-void    clearScreen(string header = "");
+void    clearScreen(const string& header = "");
+
+#endif

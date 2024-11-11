@@ -8,7 +8,7 @@
 - Using CMake for the first time
 - Remembering C++ syntax, libraries
 ## Todo
-- Github action for testing
+- Github actions (https://www.youtube.com/watch?v=R8_veQiYBjI)
 - Module01
 
 

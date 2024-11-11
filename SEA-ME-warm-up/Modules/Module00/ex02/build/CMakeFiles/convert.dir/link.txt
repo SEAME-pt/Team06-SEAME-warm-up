@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/convert.dir/src/ex02.cpp.o -o convert 

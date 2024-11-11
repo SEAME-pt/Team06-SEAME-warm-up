@@ -15,3 +15,9 @@ file(GLOB SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
 # Add the executable
 add_executable(phonebook ${SOURCES})
+
+# Enable testing
+enable_testing()
+
+# Add the test subdirectory
+add_subdirectory(test)

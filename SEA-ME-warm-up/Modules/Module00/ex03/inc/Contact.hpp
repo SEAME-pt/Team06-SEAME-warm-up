@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CONTACT_HPP
+#define CONTACT_HPP
 
 #include <string>
 
@@ -8,9 +9,9 @@ class Contact {
     public:
         Contact();
         ~Contact();
-        void    setName(string name);
-        void    setNumber(string number);
-        void    setNickname(string nickname);
+        void    setName(const string& name);
+        void    setNumber(const string& number);
+        void    setNickname(const string& nickname);
         void    setBookmarked(bool bookmarked);
         string  getName() const;
         string  getNumber() const;
@@ -23,3 +24,5 @@ class Contact {
         string  _nickname;
         bool    _bookmarked;
 };
+
+#endif
