@@ -4,6 +4,6 @@ Wheel::Wheel(){}
 
 Wheel::~Wheel(){}
 
-void print() {
+void Wheel::print() const {
 	cout << "Wheel part\n";
 }

@@ -1,4 +1,4 @@
-#pragma Wheel
+#pragma once
 
 #include "Part.hpp"
 
@@ -9,5 +9,5 @@ class Wheel : public Part{
 		Wheel();
 		~Wheel();
 
-		void print() override;
+		void print() const override;
 };

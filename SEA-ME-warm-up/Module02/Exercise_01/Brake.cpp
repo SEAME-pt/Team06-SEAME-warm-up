@@ -4,6 +4,6 @@ Brake::Brake(){}
 
 Brake::~Brake(){}
 
-void print() {
+void Brake::print() const {
 	cout << "Brake part\n";
 }

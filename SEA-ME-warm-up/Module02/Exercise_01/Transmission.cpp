@@ -4,6 +4,6 @@ Transmission::Transmission(){}
 
 Transmission::~Transmission(){}
 
-void print() {
+void Transmission::print() const {
 	cout << "Transmission part\n";
 }

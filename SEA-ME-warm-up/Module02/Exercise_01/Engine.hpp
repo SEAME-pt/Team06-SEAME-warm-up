@@ -1,4 +1,4 @@
-#pragma Engine
+#pragma once
 
 #include "Part.hpp"
 
@@ -9,5 +9,5 @@ class Engine : public Part{
 		Engine();
 		~Engine();
 
-		void print() override;
+		void print() const override;
 };

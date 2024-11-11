@@ -4,6 +4,6 @@ Engine::Engine(){}
 
 Engine::~Engine(){}
 
-void print() {
+void Engine::print() const {
 	cout << "Engine part\n";
 }

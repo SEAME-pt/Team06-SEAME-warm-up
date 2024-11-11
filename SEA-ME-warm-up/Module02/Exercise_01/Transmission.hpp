@@ -1,4 +1,4 @@
-#pragma Transmission
+#pragma once
 
 #include "Part.hpp"
 
@@ -9,5 +9,5 @@ class Transmission : public Part{
 		Transmission();
 		~Transmission();
 
-		void print() override;
+		void print() const override;
 };

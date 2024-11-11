@@ -1,4 +1,4 @@
-#pragma Part
+#pragma once
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,5 +12,5 @@ class Part{
 	public:
 		Part();
 		~Part();
-		virtual void print() = 0;
+		virtual void print() const = 0;
 };

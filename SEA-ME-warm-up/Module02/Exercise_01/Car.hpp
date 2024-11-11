@@ -1,6 +1,6 @@
-#pragma Car
+#pragma once
 
-#include "Part.hpp"
+//#include "Part.hpp"
 #include "Engine.hpp"
 #include "Brake.hpp"
 #include "Transmission.hpp"

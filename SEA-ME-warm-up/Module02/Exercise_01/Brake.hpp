@@ -1,4 +1,4 @@
-#pragma Brake
+#pragma once
 
 #include "Part.hpp"
 
@@ -9,5 +9,5 @@ class Brake : public Part{
 		Brake();
 		~Brake();
 
-		void print() override;
+		void print() const override;
 };
