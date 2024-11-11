@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up CMake
-        uses: actions/setup-cmake@v3 # This sets up CMake (which is needed for building)
+        uses: cmake/setup-cmake@v3
 
       - name: Install build dependencies
         run: |
@@ -31,4 +31,3 @@ jobs:
           cmake ..
           make
           ctest --output-on-failure
-
