@@ -1,2 +1,0 @@
-Test pull request rules
-This is the commit that is done after the review.
