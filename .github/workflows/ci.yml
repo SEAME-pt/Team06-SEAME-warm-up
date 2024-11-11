@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install dependencies
         run: |
@@ -23,6 +23,7 @@ jobs:
 
       - name: Build and run tests
         run: |
+          cd SEA-ME-warm-up/Modules/Module00/ex02
           mkdir build
           cd build
           cmake ..
