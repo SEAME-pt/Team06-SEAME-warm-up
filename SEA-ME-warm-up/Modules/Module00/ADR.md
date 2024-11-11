@@ -4,11 +4,11 @@
 - Research about mono repos and git submodules
 - Learning git pull request and git branch rules
 - Setting up github projects and team
+- Github action with TEST
 ## Module00
 - Using CMake for the first time
-- Remembering C++ syntax, libraries
+- Remembering C++
 ## Todo
-- Github actions (https://www.youtube.com/watch?v=R8_veQiYBjI)
 - Module01
 
 
