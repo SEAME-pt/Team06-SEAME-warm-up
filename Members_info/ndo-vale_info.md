@@ -1,11 +1,10 @@
-# FirstName LastName (Unique ID)
-Nuno Ventura de Sousa (ndo-vale)
+# Nuno Ventura de Sousa (ndo-vale)
 ## Profile Pic:
 ![ndo-vale photo](nuno_42photo.jpeg)
 ## Call me by this name:
 Nuno
 ## Cohort:
-July 2023
+November 2024
 ## Email ID:
 nuno.sousa@seame.pt
 ## LinkedIn:
