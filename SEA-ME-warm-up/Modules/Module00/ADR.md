@@ -10,5 +10,6 @@
 - Remembering basic C++ like syntax and use of references, lvalues, rvalues
 ### ex03
 - Remembering C++ classes
+- Github action for compile check
 ## Thoughts
 - Realizing one advantage of submodules: since filesystem changed in main branch, I will have to take extra steps to ensure the GitHub Action I setup will function
