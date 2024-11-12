@@ -64,12 +64,8 @@ void RaceWidget::addCars( const QList<Car*> &lista)
     }
 }
 
-/*
-void RaceWidget::carFinished(int carIndex)
-{
-    setFinishLine(carIndex);
-}
-*/
+
+
 
 void RaceWidget::setFinishLine(int finishLine)
 {

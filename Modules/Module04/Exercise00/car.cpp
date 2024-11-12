@@ -34,6 +34,8 @@ bool Car::isFinish()
 void Car::paint(QPainter &painter)
 {
 
+    if (m_isEnd) return;
+
     painter.setBrush(m_color);
     painter.drawRect(m_x+ m_position,m_y,CAR_SIZE,CAR_SIZE/2);
 

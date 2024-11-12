@@ -20,8 +20,6 @@ public:
     ~MainWindow();
 
 
-signals:
-    void onCarFinished(int carIndex); // Sinal emitido quando um carro chega ao fim
 
 
 private slots:
@@ -47,5 +45,7 @@ private:
 
     void setupUI(); // Configura o layout e os widgets
     void setupConnections(); // Conecta os botões aos slots
+    void onCarFinished(int carIndex); // Sinal emitido quando um carro chega ao fim
+
 };
 #endif // MAINWINDOW_H

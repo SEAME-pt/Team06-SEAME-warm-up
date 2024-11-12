@@ -38,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_raceWidget->addCars(m_carList);
 
-   // connect(m_raceWidget, &RaceWidget::carFinished, this, &MainWindow::onCarFinished);
+   connect(m_raceWidget, &RaceWidget::carFinished, this, &MainWindow::onCarFinished);
 
 
 }
@@ -57,13 +57,13 @@ MainWindow::~MainWindow()
     qDebug()<<"Exit Application !";
 }
 
-/*
+
 void MainWindow::onCarFinished(int carIndex)
 {
     QMessageBox::information(this, "Car Finished", QString("Car %1 has reached the finish line!").arg(carIndex + 1));
     stopRace();
 }
-*/
+
 
 void MainWindow::stopRace()
 {

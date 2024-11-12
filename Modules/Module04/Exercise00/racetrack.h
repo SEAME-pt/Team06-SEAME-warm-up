@@ -5,7 +5,7 @@
 class RaceTrack
 {
 public:
-    explicit RaceTrack(int size = 1000, int finishLine = 950);
+    explicit RaceTrack(int size = 800, int finishLine = 750);
     int size() const;
     int finishLine() const;
 
