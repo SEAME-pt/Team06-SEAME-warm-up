@@ -8,9 +8,6 @@ CarThread::CarThread(Car *car, RaceTrack *track, QObject *parent)
 
 void CarThread::run()
 {
-
-
-
     while (m_car->position() < m_raceTrack->finishLine())
     {
         m_mutex.lock();
@@ -20,7 +17,8 @@ void CarThread::run()
             break;
         }
         m_mutex.unlock();
-        m_car->move();
+        if (!m_pause)
+            m_car->move();
         msleep(50);
     }
     m_car->setFinish();
@@ -31,4 +29,10 @@ void CarThread::doAbort()
 {
     QMutexLocker locker(&m_mutex);
     m_abort=true;
+}
+
+void CarThread::doPause(bool pause)
+{
+    QMutexLocker locker(&m_mutex);
+    m_pause=pause;
 }

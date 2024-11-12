@@ -23,9 +23,11 @@ public:
     void setFinishLine(int finishLine);
     int  getFinishLine();
 
+
+
 signals:
     void carFinished(int carIndex); // Sinal emitido quando um carro chega ao fim
-
+    void raceFinished();
 
 public slots:
     void updateCarPosition(int x, int y); // Atualiza a posição do carro
@@ -45,6 +47,7 @@ private:
     QTimer *m_timer;
     bool m_isRaceOver=false;
     int m_finishLine=-1;
+    int m_totalEnd=0;
 };
 
 #endif // RACEWIDGET_H

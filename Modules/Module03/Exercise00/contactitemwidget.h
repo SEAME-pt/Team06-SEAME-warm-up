@@ -18,6 +18,7 @@ private:
     QLabel *m_nameLabel;
     QLabel *m_phoneLabel;
     QLabel *m_emailLabel;
+    
 };
 
 #endif // CONTACTITEMWIDGET_H

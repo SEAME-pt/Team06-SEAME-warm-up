@@ -41,11 +41,15 @@ private:
     RaceTrack *m_raceTrack;
     QList<Car*> m_carList;
     QList<CarThread*> m_threadList;
-    bool m_isPause=false;
+    bool m_isPause;
+    bool m_isGameOver;
+    int  m_totalFinish;
 
     void setupUI(); // Configura o layout e os widgets
     void setupConnections(); // Conecta os botões aos slots
     void onCarFinished(int carIndex); // Sinal emitido quando um carro chega ao fim
-
+    void onEndRace();// sinal para quando alguem ja chegou ao fim
+    void buildCars();
+    void removeCars();
 };
 #endif // MAINWINDOW_H

@@ -7,6 +7,9 @@
 #include <QRandomGenerator>
 #include <QDebug>
 
+
+const int MAX_CARS=5;
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -15,14 +18,32 @@ MainWindow::MainWindow(QWidget *parent)
     m_raceTrack  =new RaceTrack();
 
     m_isPause =false;
+    m_isGameOver=false;
+    m_totalFinish=0;
 
     setupUI();
     setupConnections();
+
+    buildCars();
+    connect(m_raceWidget, &RaceWidget::carFinished, this, &MainWindow::onCarFinished);
+    connect(m_raceWidget, &RaceWidget::raceFinished, this, &MainWindow::onEndRace);
+
+
+}
+
+void MainWindow::removeCars()
+{
+    qDeleteAll(m_carList);
+    qDeleteAll(m_threadList);
+}
+
+void MainWindow::buildCars()
+{
     //QBrush color, int x, int y,int speed = 1, int direction = 1);
 
     QBrush colors[] = {Qt::red,Qt::green,Qt::blue,Qt::yellow,Qt::magenta,Qt::white};
 
-    for (int i = 0; i < 5; ++i)
+    for (int i = 0; i <  MAX_CARS; ++i)
     {
 
         int y = 10 + TRACK_OFFSET+(i * TRACK_SIZE);
@@ -30,17 +51,13 @@ MainWindow::MainWindow(QWidget *parent)
         int speed = QRandomGenerator::global()->bounded(5, 10);
 
         Car *car = new Car(this,colors[i], 14, y,speed);
-         m_carList.append(car);
+        m_carList.append(car);
 
-       CarThread *carThread = new CarThread(car, m_raceTrack, this);
-       m_threadList.append(carThread);
+        CarThread *carThread = new CarThread(car, m_raceTrack, this);
+        m_threadList.append(carThread);
     }
 
     m_raceWidget->addCars(m_carList);
-
-   connect(m_raceWidget, &RaceWidget::carFinished, this, &MainWindow::onCarFinished);
-
-
 }
 
 
@@ -48,25 +65,39 @@ MainWindow::~MainWindow()
 {
 
     stopRace();
-
-
-
-    qDeleteAll(m_carList);
-    qDeleteAll(m_threadList);
+    removeCars();
     delete m_raceTrack;
     qDebug()<<"Exit Application !";
+}
+void MainWindow::onEndRace()
+{
+    qDebug()<<"Game Over !";
+    m_pauseButton->setDisabled(true);
+    m_startButton->setDisabled(true);
 }
 
 
 void MainWindow::onCarFinished(int carIndex)
 {
-    QMessageBox::information(this, "Car Finished", QString("Car %1 has reached the finish line!").arg(carIndex + 1));
-    stopRace();
+    if (m_totalFinish==0)
+    {
+        m_pauseButton->setDisabled(true);
+        m_startButton->setDisabled(true);
+        QMessageBox::information(this, "Car Finished", QString("Car %1 has reached the finish line!").arg(carIndex + 1));
+    }
+    qDebug()<<QString("Car %1 has reached the finish line!").arg(carIndex + 1);
+    m_totalFinish++;
+    if (m_totalFinish>=MAX_CARS)
+    {
+        m_isGameOver=true;
+        stopRace();
+    }
 }
 
 
 void MainWindow::stopRace()
 {
+    m_pauseButton->setDisabled(true);
     m_raceWidget->raceOver();
     for (CarThread *thread : m_threadList)
     {
@@ -77,6 +108,7 @@ void MainWindow::stopRace()
             thread->wait();
         }
     }
+
 }
 
 void MainWindow::setupUI()
@@ -119,15 +151,17 @@ void MainWindow::setupConnections()
 void MainWindow::startRace()
 {
     m_isPause=false;
+    m_isGameOver=true;
     m_startButton->setDisabled(true);
     m_pauseButton->setDisabled(false);
 
     for (CarThread *carThread : m_threadList)
     {
+        carThread->doPause(false);
         if (!carThread->isRunning())
         {
-            carThread->start();
 
+            carThread->start();
         }
     }
     m_raceWidget->startRace();
@@ -150,6 +184,14 @@ void MainWindow::pauseRace()
         m_pauseButton->setDisabled(true);
         m_startButton->setText("Resume");
         m_raceWidget->pauseRace();
+
+        for (CarThread *carThread : m_threadList)
+        {
+            if (carThread->isRunning())
+            {
+                carThread->doPause(true);
+            }
+        }
 
     }
 

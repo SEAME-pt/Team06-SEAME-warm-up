@@ -24,6 +24,7 @@ public:
     void setFinish();
     bool isFinish();
 
+
 signals:
      void positionChanged(int x, int y);
 
@@ -35,6 +36,9 @@ private:
     int m_speed;
     int m_direction;
     bool m_isEnd;
+    int m_tmpY;
+    int m_tmpX;
+
 
 };
 

@@ -4,7 +4,7 @@
 const int CAR_SIZE = 20;
 
 Car::Car(QObject *parent,    QBrush color,int x,int y,int speed, int direction)
-    : QObject(parent),m_color(color),m_x(x),m_y(y), m_position(0), m_speed(speed), m_direction(direction),m_isEnd(false) {}
+    : QObject(parent),m_color(color),m_x(x),m_y(y), m_position(0), m_speed(speed), m_direction(direction),m_isEnd(false),m_tmpY(y),m_tmpX(x) {}
 
 int Car::position() const
 {
@@ -20,8 +20,10 @@ void Car::move()
 
 }
 
+
 void Car::setFinish()
 {
+    m_position=0;
 
     m_isEnd=true;
 }

@@ -17,10 +17,13 @@ public:
     void run() override;
 
     void doAbort();
+    void doPause(bool pause);
+
 
 private:
     Car *m_car;
     bool m_abort=false;
+    bool m_pause=false;
     RaceTrack *m_raceTrack;
     QMutex m_mutex;
 

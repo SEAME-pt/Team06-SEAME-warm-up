@@ -43,7 +43,7 @@ void RaceWidget::pauseRace()
 {
     m_timer->stop();
     m_raceStarted = false;
-    update(); // redraw o widget
+    //update(); // redraw o widget
 }
 
 void RaceWidget::raceOver()
@@ -51,8 +51,12 @@ void RaceWidget::raceOver()
     m_timer->stop();
     m_isRaceOver =true;
     m_raceStarted = false;
-    update(); // redraw o widget
+    emit raceFinished();
+
 }
+
+
+
 
 void RaceWidget::addCars( const QList<Car*> &lista)
 {
@@ -119,21 +123,27 @@ void RaceWidget::drawTrack(QPainter &painter)
 
 void RaceWidget::drawCars(QPainter &painter)
 {
-    if (m_isRaceOver) return;
-
     if (m_carList.empty())
     {
         qDebug()  << " No cars in Track!";
         return;
     }
+    if (m_isRaceOver)
+    {
+        return;
+    }
+
+
     for (int i=0;i<m_carList.size();i++)
     {
         Car * car = m_carList[i];
-        car->paint(painter);
+
         if (car->isFinish())
         {
             emit carFinished(i);
-            raceOver();
+        } else
+        {
+           car->paint(painter);
         }
     }
 
