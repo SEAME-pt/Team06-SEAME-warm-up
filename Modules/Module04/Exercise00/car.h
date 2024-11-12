@@ -21,6 +21,9 @@ public:
     void move();
     void paint(QPainter &painter);
 
+    void setFinish();
+    bool isFinish();
+
 signals:
      void positionChanged(int x, int y);
 
@@ -31,6 +34,7 @@ private:
     int m_position;
     int m_speed;
     int m_direction;
+    bool m_isEnd;
 
 };
 

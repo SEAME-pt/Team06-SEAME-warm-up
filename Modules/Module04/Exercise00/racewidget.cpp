@@ -33,15 +33,23 @@ void RaceWidget::gameUpdate()
 
 void RaceWidget::startRace()
 {
-    m_timer->start(30); // Redesenha a cada 30 ms
-
+    m_isRaceOver=false;
     m_raceStarted = true;
-    update(); // Redesenha o widget
+    m_timer->start(30); // update a cada 30 ms
+    update();
 }
 
 void RaceWidget::pauseRace()
 {
     m_timer->stop();
+    m_raceStarted = false;
+    update(); // redraw o widget
+}
+
+void RaceWidget::raceOver()
+{
+    m_timer->stop();
+    m_isRaceOver =true;
     m_raceStarted = false;
     update(); // redraw o widget
 }
@@ -54,6 +62,23 @@ void RaceWidget::addCars( const QList<Car*> &lista)
         Car * car = m_carList[i];
         connect(car, &Car::positionChanged, this, &RaceWidget::updateCarPosition);
     }
+}
+
+/*
+void RaceWidget::carFinished(int carIndex)
+{
+    setFinishLine(carIndex);
+}
+*/
+
+void RaceWidget::setFinishLine(int finishLine)
+{
+    m_finishLine = finishLine;
+}
+
+int RaceWidget::getFinishLine()
+{
+    return m_finishLine;
 }
 
 void RaceWidget::paint(QPainter &painter)
@@ -87,12 +112,18 @@ void RaceWidget::drawTrack(QPainter &painter)
        painter.drawLine(10,y,width() - 10,y);
     }
 
+    if (m_isRaceOver)
+    {
+
+    }
+
     painter.setPen(previousPen);
     // painter.restore();
 }
 
 void RaceWidget::drawCars(QPainter &painter)
 {
+    if (m_isRaceOver) return;
 
     if (m_carList.empty())
     {
@@ -103,6 +134,11 @@ void RaceWidget::drawCars(QPainter &painter)
     {
         Car * car = m_carList[i];
         car->paint(painter);
+        if (car->isFinish())
+        {
+            emit carFinished(i);
+            raceOver();
+        }
     }
 
 }

@@ -17,9 +17,14 @@ public:
     void pauseRace();
 
     void addCars(const QList<Car*> &lista);
-
+    void raceOver();
 
     void paint(QPainter &painter);
+    void setFinishLine(int finishLine);
+    int  getFinishLine();
+
+signals:
+    void carFinished(int carIndex); // Sinal emitido quando um carro chega ao fim
 
 
 public slots:
@@ -38,6 +43,8 @@ private:
     QList<Car*> m_carList;
     bool m_raceStarted;
     QTimer *m_timer;
+    bool m_isRaceOver=false;
+    int m_finishLine=-1;
 };
 
 #endif // RACEWIDGET_H

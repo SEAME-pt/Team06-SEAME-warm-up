@@ -4,6 +4,8 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QPainter>
+#include <QRandomGenerator>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -25,7 +27,9 @@ MainWindow::MainWindow(QWidget *parent)
 
         int y = 10 + TRACK_OFFSET+(i * TRACK_SIZE);
 
-        Car *car = new Car(this,colors[i], 14, y);
+        int speed = QRandomGenerator::global()->bounded(5, 10);
+
+        Car *car = new Car(this,colors[i], 14, y,speed);
          m_carList.append(car);
 
        CarThread *carThread = new CarThread(car, m_raceTrack, this);
@@ -34,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_raceWidget->addCars(m_carList);
 
+   // connect(m_raceWidget, &RaceWidget::carFinished, this, &MainWindow::onCarFinished);
 
 
 }
@@ -41,14 +46,37 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    for (CarThread *thread : m_threadList)
-    {
-        thread->quit();
-        thread->wait();
-    }
+
+    stopRace();
+
+
+
     qDeleteAll(m_carList);
     qDeleteAll(m_threadList);
     delete m_raceTrack;
+    qDebug()<<"Exit Application !";
+}
+
+/*
+void MainWindow::onCarFinished(int carIndex)
+{
+    QMessageBox::information(this, "Car Finished", QString("Car %1 has reached the finish line!").arg(carIndex + 1));
+    stopRace();
+}
+*/
+
+void MainWindow::stopRace()
+{
+    m_raceWidget->raceOver();
+    for (CarThread *thread : m_threadList)
+    {
+        thread->doAbort();
+        if (thread->isRunning())
+        {
+            thread->doAbort();
+            thread->wait();
+        }
+    }
 }
 
 void MainWindow::setupUI()
@@ -134,14 +162,5 @@ void MainWindow::pauseRace()
 
 void MainWindow::exitGame()
 {
-    for (CarThread *thread : m_threadList)
-    {
-        //if (thread->isRunning())
-        {
-            thread->quit();
-            thread->wait();   // Aguarda até que a thread termine
-        }
-    }
-
     close();
 }

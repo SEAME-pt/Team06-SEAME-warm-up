@@ -16,10 +16,14 @@ public:
     explicit CarThread(Car *car, RaceTrack *track, QObject *parent = nullptr);
     void run() override;
 
+    void doAbort();
+
 private:
     Car *m_car;
+    bool m_abort=false;
     RaceTrack *m_raceTrack;
-    QMutex mutex;
+    QMutex m_mutex;
+
 };;
 
 #endif // CARTHREAD_H

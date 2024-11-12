@@ -19,11 +19,17 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+
+signals:
+    void onCarFinished(int carIndex); // Sinal emitido quando um carro chega ao fim
+
+
 private slots:
     void startRace();
     void pauseRace();
     void exitGame();
 
+    void stopRace();
 
 
 
