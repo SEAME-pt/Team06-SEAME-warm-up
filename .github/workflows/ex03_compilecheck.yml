@@ -23,7 +23,7 @@ jobs:
       # Compile the code
       - name: Compile
         run: |
-          cd SEA-ME-warm-up/Modules/Module00/ex03
+          cd Modules/Module00/ex03
           mkdir build
           cd build
           cmake ..

@@ -1,4 +1,4 @@
-# ADR
+# JOURNAL (jmoreira)
 ## Module00
 - Learning about qt and installing it
 - Research about mono repos and git submodules

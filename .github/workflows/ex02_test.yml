@@ -23,7 +23,7 @@ jobs:
 
       - name: Build and run tests
         run: |
-          cd SEA-ME-warm-up/Modules/Module00/ex02
+          cd Modules/Module00/ex02
           mkdir build
           cd build
           cmake ..
