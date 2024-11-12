@@ -1,3 +1,0 @@
-/home/zeira/Team06-SEAME-warm-up/SEA-ME-warm-up/Modules/Module00/ex03/build/CMakeFiles/phonebook.dir
-/home/zeira/Team06-SEAME-warm-up/SEA-ME-warm-up/Modules/Module00/ex03/build/CMakeFiles/edit_cache.dir
-/home/zeira/Team06-SEAME-warm-up/SEA-ME-warm-up/Modules/Module00/ex03/build/CMakeFiles/rebuild_cache.dir

@@ -1,15 +1,14 @@
 # ADR
-## General
+## Module00
 - Learning about qt and installing it
 - Research about mono repos and git submodules
 - Learning git pull request and git branch rules
 - Setting up github projects and team
-- Github action with TEST
-## Module00
+### ex02
+- Github action with GTest
 - Using CMake for the first time
-- Remembering C++
-## Todo
-- Module01
-
-
-
+- Remembering basic C++ like syntax and use of references, lvalues, rvalues
+### ex03
+- Remembering C++ classes
+## Thoughts
+- Realizing one advantage of submodules: since filesystem changed in main branch, I will have to take extra steps to ensure the GitHub Action I setup will function

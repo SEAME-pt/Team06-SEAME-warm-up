@@ -23,6 +23,35 @@ void    Phonebook::addContact() {
     return;
 }
 
+/*
+* Displays selected contact (from index) information and allows user to bookmark or remove bookmark
+*/
+void    Phonebook::showContact(int& contactIndex) {
+    clearScreen("SEARCH CONTACT");
+    cout << "Name: " << this->_contacts[contactIndex].getName() << '\n';
+    cout << "Number: " << this->_contacts[contactIndex].getNumber() << '\n';
+    cout << "Nickname: " << this->_contacts[contactIndex].getNickname() << '\n';
+    cout << "Bookmarked: " << (this->_contacts[contactIndex].getBookmarked() ? "Yes" : "No") << '\n';
+    cout << "\n1. Bookmark\n";
+    cout << "2. Remove from Bookmarks\n";
+    cout << "Back to menu with an invalid option\n\n";
+    switch (add_prompt("Enter an option: ")[0]) {
+        case '1':
+            this->_contacts[contactIndex].setBookmarked(true);
+            break;
+        case '2':
+            this->_contacts[contactIndex].setBookmarked(false);
+            break;
+        default:
+            clearScreen("SEARCH CONTACT");
+            cout << "Invalid option\n";
+            break;
+    }
+}
+
+/*
+* Displays list of contacts saved in Phonebook and allows user to select a contact to view
+*/
 void    Phonebook::searchContact() {
     int contactIndex;
 
@@ -37,32 +66,15 @@ void    Phonebook::searchContact() {
     stringstream ss(input);
     ss >> contactIndex;
     contactIndex -= 1;
-    if (contactIndex >= 0 && contactIndex < this->_contacts.size())
-    {
-        clearScreen("SEARCH CONTACT");
-        cout << "Name: " << this->_contacts[contactIndex].getName() << '\n';
-        cout << "Number: " << this->_contacts[contactIndex].getNumber() << '\n';
-        cout << "Nickname: " << this->_contacts[contactIndex].getNickname() << '\n';
-        cout << "Bookmarked: " << (this->_contacts[contactIndex].getBookmarked() ? "Yes" : "No") << '\n';
-        cout << "\n1. Bookmark\n";
-        cout << "2. Remove from Bookmarks\n";
-        cout << "Back to menu with an invalid option\n\n";
-        switch (add_prompt("Enter an option: ")[0]) {
-            case '1':
-                this->_contacts[contactIndex].setBookmarked(true);
-                break;
-            case '2':
-                this->_contacts[contactIndex].setBookmarked(false);
-                break;
-            default:
-                clearScreen("SEARCH CONTACT");
-                cout << "Invalid option\n";
-                break;
-        }
+    if (contactIndex >= 0 && contactIndex < this->_contacts.size()){
+        showContact(contactIndex);
     }
     return;
 }
 
+/*
+* Prints list of contacts saved in Phonebook
+*/
 void    Phonebook::printContacts() const {
     for (size_t i = 0; i < this->_contacts.size(); i++) {
         cout << i + 1 << ". ";
@@ -71,6 +83,9 @@ void    Phonebook::printContacts() const {
     }
 }
 
+/*
+* Option to remove contact by number or from the list
+*/
 void    Phonebook::removeContact() {
     int contactIndex;
 
@@ -94,6 +109,9 @@ void    Phonebook::removeContact() {
     return;
 }
 
+/*
+* Removes all contacts with given number
+*/
 void   Phonebook::removeContactByNumber() {
     string number;
 
@@ -124,6 +142,9 @@ void   Phonebook::removeContactByNumber() {
     return;
 }
 
+/*
+* Removes contact from list by index
+*/
 void    Phonebook::removeContactByIndex() {
     int contactIndex;
 
@@ -146,6 +167,9 @@ void    Phonebook::removeContactByIndex() {
     return;
 }
 
+/*
+* Prints bookmarked contacts
+*/
 void    Phonebook::printBookmarked() const {
     clearScreen("BOOKMARKED CONTACTS");
     for (size_t i = 0; i < this->_contacts.size(); i++) {
@@ -164,6 +188,10 @@ bool    Phonebook::hasContacts() const {
     return this->_contacts.size() > 0;
 }
 
+/*
+* Prompts user for input and returns trimmed string
+* does not allow empty strings or strings with only whitespace
+*/
 const string add_prompt(const string& s) {
    string	str;
 
@@ -177,6 +205,9 @@ const string add_prompt(const string& s) {
     return (ft_trim_ws(str));
 }
 
+/*
+* Trims whitespace from beginning of string
+*/
 const string   ft_trim_ws(string s)
 {
 	int i = 0;
@@ -196,7 +227,9 @@ bool    ft_isspace(const string& s)
 	return true;
 }
 
-
+/*
+* Clears screen and prints header
+*/
 void    clearScreen(const string& header) {
     cout << "\033[2J\033[1;1H";
     if (!header.empty()) {
@@ -206,6 +239,9 @@ void    clearScreen(const string& header) {
     }
 }
 
+/*
+* Pauses program until user presses ENTER
+*/
 void    pause(){
     cout << "\nPress ENTER to continue...";
     while(1) {

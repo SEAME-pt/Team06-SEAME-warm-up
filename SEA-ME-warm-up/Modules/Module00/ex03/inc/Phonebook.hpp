@@ -33,6 +33,7 @@ private:
     void removeContactByNumber();
     void removeContactByIndex();
     bool hasContacts() const;
+    void showContact(int &contactIndex);
 };
 
 const string  add_prompt(const string& s);
