@@ -28,7 +28,7 @@ void RaceCanvas::reset()
     {
         car->x = 0;
         car->finished = false;
-        car->randomizeSpeed();
+       // car->randomizeSpeed();
     }
     winner = nullptr;
     update();
@@ -87,7 +87,7 @@ void RaceCanvas::paintEvent(QPaintEvent*)
             if (!winner)
             {
                 winner = car;
-                emit winnerDeclared(winner->name);
+                emit winnerDeclared(winner->name);  // Emite o sinal com o nome do vencedor
             }
         }
     }
@@ -99,7 +99,7 @@ void RaceCanvas::paintEvent(QPaintEvent*)
         painter.drawText(width()/2 - 100, 30,QString("VENCEDOR: %1!").arg(winner->name));
         for(auto& car : cars)
         {
-            car->speed=0;
+           car->speed=0;
         }
 
     }

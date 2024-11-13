@@ -86,7 +86,7 @@ void MainWindow::startRace()
     {
         for(auto car : canvas->getCars())
         {
-            car->randomizeSpeed();
+           car->randomizeSpeed();
         }
         for(auto thread : threads)
         {
