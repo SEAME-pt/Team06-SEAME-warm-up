@@ -30,9 +30,7 @@
 - Working with Qt
 ### Difficulties
 - When I started coding ex03 I did not manage exceptions the right way and the way the methods are built (very dependent on user input), isn't the best for testing, but still possible with mock user inputs. Think about testing before coding will be a priority from now on.
-- Tried creating a friend class for testing in ex03 but still couldn't access private stuff. Will move on to m01 without implementing the test because of the time I've already spent on this.
-
-
+- Tried creating a friend class for testing in ex03 but still couldn't access private stuff. Will move on to m01 without implementing the test because of the time I've already spent on this. Might be CMake issue with linking or compiler issue...
 
 
 
