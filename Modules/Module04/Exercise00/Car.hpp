@@ -17,6 +17,8 @@ public:
 
     Car(int startY, QColor c, QString n);
 
+    void move();
+
     void randomizeSpeed();
 };
 
