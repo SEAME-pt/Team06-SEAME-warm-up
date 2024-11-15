@@ -22,11 +22,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y cmake g++ make
 
-          name: Build and run tests
-          run: |
-            cd Modules/Module02/ex01
-            mkdir build
-            cd build
-            cmake ..
-            make
-            ctest --output-on-failure
+      - name: Build and run tests
+        run: |
+          cd Modules/Module02/Exercise_01
+          rm -rf build
+          mkdir build
+          cd build
+          cmake ..
+          make
+          ctest --output-on-failure
