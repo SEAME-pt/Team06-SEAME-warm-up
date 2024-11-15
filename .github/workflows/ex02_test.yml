@@ -1,0 +1,31 @@
+name: C++ CI with GoogleTest
+
+on:
+  push:
+    branches:
+      - jmoreira00
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake g++ make
+
+      - name: Build and run tests
+        run: |
+          cd Modules/Module00/ex02
+          mkdir build
+          cd build
+          cmake ..
+          make
+          ctest --output-on-failure
