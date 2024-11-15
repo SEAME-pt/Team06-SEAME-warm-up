@@ -13,4 +13,4 @@
 ### Difficulties
 - Still a lot to improving testing wise
 - Found my C++ to be very rusty, syntax mainly, but it is coming back
-- Didn't get to learn/do everything I wanted in these 2 weeks
+- Didn't get to learn/do everything I wanted in these 2 weeks, and I wish I didn't have to rush so much
