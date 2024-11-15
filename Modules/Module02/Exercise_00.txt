@@ -1,0 +1,13 @@
+smart_pointer_summary = """
+
+Smart Pointer Type | Ownership      | Memory Release Condition            | Advantages
+
+-------------------|----------------|-------------------------------------|-----------------------------------------------------------
+
+`unique_ptr`       | Exclusive      | When goes out of scope             | Lightweight and efficient, no reference counting
+
+`shared_ptr`       | Shared         | When reference count reaches zero  | Allows multiple references to the same resource
+
+`weak_ptr`         | None           | -                                   | Prevents reference cycles, checks if resource exists
+
+"""
