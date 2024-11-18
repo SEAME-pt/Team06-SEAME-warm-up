@@ -1,0 +1,31 @@
+# Missing tests (check JOURNAL.md)
+name: m00ex03
+
+on:
+  push:
+    branches:
+      - jmoreira00
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y g++
+
+      # Compile the code
+      - name: Compile
+        run: |
+            cd Modules/Module00/ex03
+            mkdir build
+            cd build
+            cmake ..
+            make

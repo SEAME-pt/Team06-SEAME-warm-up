@@ -1,9 +1,9 @@
-name: C++ CI with GoogleTest
+name: m01ex00
 
 on:
   push:
     branches:
-      - jmoreira00
+      - jmoreira01
   pull_request:
     branches:
       - main
@@ -23,7 +23,7 @@ jobs:
 
       - name: Build and run tests
         run: |
-          cd Modules/Module00/ex02
+          cd Modules/Module01/ex00
           mkdir build
           cd build
           cmake ..

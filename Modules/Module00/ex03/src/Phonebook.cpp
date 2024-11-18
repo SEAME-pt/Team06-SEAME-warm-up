@@ -19,7 +19,7 @@ void    Phonebook::addContact() {
     this->_contacts.push_back(newContact);
     clearScreen("ADD CONTACT");
     cout << "Contact successfully added to Phonebook\n";
-    pause();
+    screenPause();
     return;
 }
 
@@ -27,6 +27,9 @@ void    Phonebook::addContact() {
 * Displays selected contact (from index) information and allows user to bookmark or remove bookmark
 */
 void    Phonebook::showContact(int& contactIndex) {
+     if (!(contactIndex >= 0 && contactIndex < this->_contacts.size())) {
+        throw out_of_range("Invalid index");
+     }
     clearScreen("SEARCH CONTACT");
     cout << "Name: " << this->_contacts[contactIndex].getName() << '\n';
     cout << "Number: " << this->_contacts[contactIndex].getNumber() << '\n';
@@ -43,8 +46,6 @@ void    Phonebook::showContact(int& contactIndex) {
             this->_contacts[contactIndex].setBookmarked(false);
             break;
         default:
-            clearScreen("SEARCH CONTACT");
-            cout << "Invalid option\n";
             break;
     }
 }
@@ -53,21 +54,24 @@ void    Phonebook::showContact(int& contactIndex) {
 * Displays list of contacts saved in Phonebook and allows user to select a contact to view
 */
 void    Phonebook::searchContact() {
-    int contactIndex;
-
     clearScreen("SEARCH CONTACT");
-    if (!this->hasContacts()) {
-        cout << "No contacts in Phonebook\n";
-        pause();
-        return;
-    }
-    this->printContacts();
-    string input = add_prompt("\nEnter the index of the contact you want to view: ");
-    stringstream ss(input);
-    ss >> contactIndex;
-    contactIndex -= 1;
-    if (contactIndex >= 0 && contactIndex < this->_contacts.size()){
-        showContact(contactIndex);
+    try {
+        this->hasContacts();
+        this->printContacts();
+        string input = add_prompt("\nEnter the index of the contact you want to view: ");
+        stringstream ss(input);
+        int contactIndex;
+        ss >> contactIndex;
+        contactIndex -= 1;
+        this->showContact(contactIndex);
+    } catch (out_of_range &e) {
+        clearScreen("SEARCH CONTACT");
+        cerr << e.what() << '\n';
+        screenPause();
+    } catch (invalid_argument &e) {
+        clearScreen("SEARCH CONTACT");
+        cerr << e.what() << '\n';
+        screenPause();
     }
     return;
 }
@@ -80,6 +84,7 @@ void    Phonebook::printContacts() const {
         cout << i + 1 << ". ";
         cout <<  this->_contacts[i].getName();
         cout << '\n';
+        cout.flush();
     }
 }
 
@@ -87,24 +92,27 @@ void    Phonebook::printContacts() const {
 * Option to remove contact by number or from the list
 */
 void    Phonebook::removeContact() {
-    int contactIndex;
-
     clearScreen("REMOVE CONTACT");
-    if (!this->hasContacts()) {
-        cout << "No contacts in Phonebook\n";
-        pause();
-        return;
-    }
-    cout << "1. Contact number\n";
-    cout << "2. Show contact list\n";
-    string input = add_prompt("\nEnter an option: ");
-    if (input == "1") {
-        this->removeContactByNumber();
-    } else if (input == "2") {
-        this->removeContactByIndex();
-    } else {
+    try {
+        this->hasContacts();
+        cout << "1. Contact number\n";
+        cout << "2. Show contact list\n";
+        string input = add_prompt("\nEnter an option: ");
+        if (input == "1") {
+            this->removeContactByNumber();
+        } else if (input == "2") {
+            this->removeContactByIndex();
+        } else {
+            throw invalid_argument("Invalid option");
+        }
+    } catch (invalid_argument &e) {
         clearScreen("REMOVE CONTACT");
-        cout << "Invalid option\n";
+        cerr << e.what() << '\n';
+        screenPause();
+    } catch (out_of_range &e) {
+        clearScreen("REMOVE CONTACT");
+        cerr << e.what() << '\n';
+        screenPause();
     }
     return;
 }
@@ -113,10 +121,8 @@ void    Phonebook::removeContact() {
 * Removes all contacts with given number
 */
 void   Phonebook::removeContactByNumber() {
-    string number;
-
     clearScreen("REMOVE CONTACT");
-    number = add_prompt("Enter the number of the contact you want to remove: ");
+    string number = add_prompt("Enter the number of the contact you want to remove: ");
     int erased = 0;
     for (size_t i = 0; i < this->_contacts.size(); i++) {
         if (this->_contacts[i].getNumber() == number) {
@@ -128,17 +134,16 @@ void   Phonebook::removeContactByNumber() {
     if (erased == 1) {
         clearScreen("REMOVE CONTACT");
         cout << "Contact successfully removed from Phonebook\n";
-        pause();
+        screenPause();
         return;
     } else if (erased > 1) {
         clearScreen("REMOVE CONTACT");
         cout << erased << " contacts successfully removed from Phonebook\n";
-        pause();
+        screenPause();
         return;
+    } else {
+        throw invalid_argument("No contacts with that number");
     }
-    clearScreen("REMOVE CONTACT");
-    cout << "Contact not found\n";
-    pause();
     return;
 }
 
@@ -146,23 +151,20 @@ void   Phonebook::removeContactByNumber() {
 * Removes contact from list by index
 */
 void    Phonebook::removeContactByIndex() {
-    int contactIndex;
-
     clearScreen("REMOVE CONTACT");
     this->printContacts();
     string input = add_prompt("Enter the index of the contact you want to remove: ");
     stringstream ss(input);
+    int contactIndex;
     ss >> contactIndex;
     contactIndex -= 1;
     if (contactIndex >= 0 && contactIndex < this->_contacts.size()) {
         this->_contacts.erase(this->_contacts.begin() + contactIndex);
         clearScreen("REMOVE CONTACT");
         cout << "Contact successfully removed from Phonebook\n";
-        pause();
+        screenPause();
     } else {
-        clearScreen("REMOVE CONTACT");
-        cout << "Invalid index\n";
-        pause();
+        throw out_of_range("Invalid index");
     }
     return;
 }
@@ -180,12 +182,15 @@ void    Phonebook::printBookmarked() const {
             cout << '\n';
         }
     }
-    pause();
+    screenPause();
     return;
 }
 
 bool    Phonebook::hasContacts() const {
-    return this->_contacts.size() > 0;
+    if (this->_contacts.size() > 0)
+        return true;
+    else
+        throw std::invalid_argument("No contacts in Phonebook");
 }
 
 /*
@@ -195,14 +200,25 @@ bool    Phonebook::hasContacts() const {
 const string add_prompt(const string& s) {
    string	str;
 
-    cout << s;
-    while (str.empty() || ft_isspace(str))
-    {
+    cout << s << flush;
+    while (true) {
         getline(cin, str);
-        if (cin.eof() ||cin.fail())
-            exit (1);
+        if (cin.eof()) {
+            throw std::runtime_error("Input terminated by user (EOF).");
+        }
+        if (cin.fail()) {
+            cin.clear(); //clear error flags
+            cerr << "Invalid input. Please try again.\n";
+            continue;
+        }
+        str = ft_trim_ws(str);
+        if (!str.empty() && !ft_isspace(str)) {
+            break;
+        }
+        cerr << "Can't be white spaces!\n";
+        cout << s << flush;
     }
-    return (ft_trim_ws(str));
+    return (str);
 }
 
 /*
@@ -219,8 +235,7 @@ const string   ft_trim_ws(string s)
 
 bool    ft_isspace(const string& s)
 {
-	for(int i = 0; i < static_cast<int>(s.length()); i++)
-	{
+	for(int i = 0; i < static_cast<int>(s.length()); i++) {
 		if(!isspace(s[i]))
 			return false;
 	}
@@ -242,10 +257,20 @@ void    clearScreen(const string& header) {
 /*
 * Pauses program until user presses ENTER
 */
-void    pause(){
-    cout << "\nPress ENTER to continue...";
-    while(1) {
-        if (cin.get() == '\n')
+void screenPause() {
+    cout << "\nPress ENTER to continue..." << flush;
+
+    while (true) {
+        int ch = cin.get();
+
+        if (ch == '\n') {
             break;
+        } else if (cin.eof()) {
+            throw std::runtime_error("EOF encountered while waiting for ENTER.");
+        } else if (cin.fail()) {
+            cerr << "Input error detected. Clearing input stream...\n";
+            cin.clear();
+            cout << "\nPress ENTER to continue..." << flush;
+        }
     }
 }
